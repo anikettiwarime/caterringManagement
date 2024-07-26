@@ -1,0 +1,14 @@
+
+.rbc-btn-group > button{
+  color: gray;
+}
+
+.rbc-btn-group > button:hover{
+  transition: 0.7s;
+  background-color: #1e40af;
+  color: white;
+}
+.rbc-active{
+  background-color: #1e40af !important;
+  color: white !important;
+}
