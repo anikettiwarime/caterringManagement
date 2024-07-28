@@ -1,4 +1,4 @@
-import {AuthContextType} from '@/types';
+import {AuthContextType} from '@/types/auth';
 
 export const INITIAL_AUTH_STATE: AuthContextType = {
   user: null,

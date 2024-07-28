@@ -1,6 +1,6 @@
 import {ReactNode, useEffect, useState} from 'react';
 import {AuthContext} from './AuthContext';
-import {Token, User} from '@/types';
+import {Token, User} from '@/types/auth';
 import {QUERY_KEYS} from '@/lib/react-query/queryKeys';
 import {jwtDecode} from 'jwt-decode';
 

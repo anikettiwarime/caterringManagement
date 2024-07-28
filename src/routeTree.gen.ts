@@ -17,6 +17,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as AuthSignupImport } from './routes/_auth/signup'
 import { Route as AuthSigninImport } from './routes/_auth/signin'
 import { Route as AppDashboardImport } from './routes/_app/dashboard'
+import { Route as AppUsersCaterorImport } from './routes/_app/users/cateror'
 
 // Create/Update Routes
 
@@ -47,6 +48,11 @@ const AuthSigninRoute = AuthSigninImport.update({
 
 const AppDashboardRoute = AppDashboardImport.update({
   path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppUsersCaterorRoute = AppUsersCaterorImport.update({
+  path: '/users/cateror',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -96,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignupImport
       parentRoute: typeof AuthImport
     }
+    '/_app/users/cateror': {
+      id: '/_app/users/cateror'
+      path: '/users/cateror'
+      fullPath: '/users/cateror'
+      preLoaderRoute: typeof AppUsersCaterorImport
+      parentRoute: typeof AppImport
+    }
   }
 }
 
@@ -103,7 +116,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  AppRoute: AppRoute.addChildren({ AppDashboardRoute }),
+  AppRoute: AppRoute.addChildren({ AppDashboardRoute, AppUsersCaterorRoute }),
   AuthRoute: AuthRoute.addChildren({ AuthSigninRoute, AuthSignupRoute }),
 })
 
@@ -126,7 +139,8 @@ export const routeTree = rootRoute.addChildren({
     "/_app": {
       "filePath": "_app.tsx",
       "children": [
-        "/_app/dashboard"
+        "/_app/dashboard",
+        "/_app/users/cateror"
       ]
     },
     "/_auth": {
@@ -147,6 +161,10 @@ export const routeTree = rootRoute.addChildren({
     "/_auth/signup": {
       "filePath": "_auth/signup.tsx",
       "parent": "/_auth"
+    },
+    "/_app/users/cateror": {
+      "filePath": "_app/users/cateror.tsx",
+      "parent": "/_app"
     }
   }
 }
