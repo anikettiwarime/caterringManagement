@@ -16,7 +16,7 @@ const signIn = async (data: signInData) => {
   } catch (error) {
     if (error instanceof AxiosError) {
       throw new Error(
-        error.response?.data?.message || 'Something went wrong with sign in'
+        error.response?.data?.message || 'Something went wrong with sign in',
       );
     }
     throw error;
@@ -30,7 +30,7 @@ const signUp = async (data: signUpData) => {
   } catch (error) {
     if (error instanceof AxiosError) {
       throw new Error(
-        error.response?.data?.message || 'Something went wrong with sign up'
+        error.response?.data?.message || 'Something went wrong with sign up',
       );
     }
     throw error;
@@ -48,7 +48,7 @@ const signOut = async (token: string) => {
   } catch (error) {
     if (error instanceof AxiosError) {
       throw new Error(
-        error.response?.data?.message || 'Something went wrong with sign out'
+        error.response?.data?.message || 'Something went wrong with sign out',
       );
     }
     throw error;

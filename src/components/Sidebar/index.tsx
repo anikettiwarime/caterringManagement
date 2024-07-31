@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Link, useLocation} from '@tanstack/react-router';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import Logo from '../../assets/images/logo/logo.svg';
-import {SidebarProps} from '@/types/sidebar';
+import {SidebarProps} from '@/types';
 import {PiSquaresFourLight} from 'react-icons/pi';
 import {IoIosArrowUp} from 'react-icons/io';
 import {FaArrowLeftLong} from 'react-icons/fa6';

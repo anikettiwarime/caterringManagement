@@ -1,0 +1,80 @@
+import {GetAllCaterorsApiResponse, SearchOrGetAllCaterorsParams} from '@/types';
+import {api} from '@/utils/axios';
+import {AxiosError} from 'axios';
+
+const createCateror = async (data: {UserID: string}, token: string) => {
+  try {
+    const res = await api.post('/cateror', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(
+        error.response?.data?.message || 'Something went wrong with sign up',
+      );
+    }
+    throw error;
+  }
+};
+
+const getAllCaterors = async ({
+  token,
+  page,
+  limit,
+}: SearchOrGetAllCaterorsParams): Promise<GetAllCaterorsApiResponse> => {
+  try {
+    const res = await api.get('/cateror', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page,
+        limit,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(
+        error.response?.data?.message || 'Something went wrong with sign up',
+      );
+    }
+    throw error;
+  }
+};
+
+const searchCaterors = async ({
+  token,
+  query,
+  page,
+  limit,
+}: SearchOrGetAllCaterorsParams): Promise<GetAllCaterorsApiResponse> => {
+  try {
+    const res = await api.get('/cateror/search', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page,
+        limit,
+        query,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(
+        error.response?.data?.message || 'Something went wrong with sign up',
+      );
+    }
+    throw error;
+  }
+};
+
+export {createCateror, getAllCaterors, searchCaterors};

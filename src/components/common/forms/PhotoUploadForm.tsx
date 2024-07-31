@@ -1,5 +1,5 @@
 import React from 'react';
-import userThree from '../../assets/images/user/user-03.png';
+import userThree from '../../../assets/images/user/user-03.png';
 import {MdOutlineFileUpload} from 'react-icons/md';
 
 const PhotoUploadForm: React.FC = () => {

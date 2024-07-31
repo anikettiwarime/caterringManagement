@@ -1,4 +1,4 @@
-import {SidebarLinkGroupProps} from '@/types/sidebar';
+import {SidebarLinkGroupProps} from '@/types';
 import {useState} from 'react';
 
 const SidebarLinkGroup = ({
