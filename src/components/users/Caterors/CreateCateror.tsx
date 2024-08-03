@@ -54,12 +54,15 @@ const CreateCateror: React.FC = () => {
   const handleFormSubmit = async (data: FormValues) => {
     console.log('Form submitted', data);
 
+    const caterorData = {
+      UserID: '',
+      token: token?.accessToken || '',
+    };
+
     try {
       const res = await signUp(data);
-      await createCateror({
-        UserID: res.data.UserID,
-        token: token?.accessToken || '',
-      });
+      caterorData.UserID = res.data.UserID;
+      await createCateror(caterorData);
     } catch (error) {
       console.log(error);
     }

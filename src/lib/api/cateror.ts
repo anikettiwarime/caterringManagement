@@ -1,10 +1,15 @@
-import {GetAllCaterorsApiResponse, SearchOrGetAllCaterorsParams} from '@/types';
+import {
+  CreateCaterorParams,
+  GetAllCaterorsApiResponse,
+  SearchOrGetAllCaterorsParams,
+} from '@/types';
 import {api} from '@/utils/axios';
 import {AxiosError} from 'axios';
 
-const createCateror = async (data: {UserID: string}, token: string) => {
+const createCateror = async (data: CreateCaterorParams) => {
+  const {token, UserID} = data;
   try {
-    const res = await api.post('/cateror', data, {
+    const res = await api.post('/cateror', UserID, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -1,23 +1,5 @@
 import React, {ReactNode} from 'react';
-
-// **Sidebar Interfaces**
-export interface SidebarProps {
-  sidebarOpen: boolean;
-  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface SidebarLinkGroupProps {
-  children: (handleClick: () => void, open: boolean) => ReactNode;
-  activeCondition: boolean;
-}
-
-// **API Response Interfaces**
-export interface ApiResponse<T> {
-  statusCode: number;
-  status: boolean;
-  message: string;
-  data: T;
-}
+import {z} from 'zod';
 
 // **User and Auth Interfaces**
 export interface User {
@@ -43,8 +25,15 @@ export interface AuthContextType {
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// **Pagination Interfaces**
+// **API Response Interfaces**
+export interface ApiResponse<T> {
+  statusCode: number;
+  status: boolean;
+  message: string;
+  data: T;
+}
 
+// **Pagination Interfaces**
 export interface LimitSelectorProps {
   pageOptions?: number[];
   selectedLimit: number;
@@ -55,6 +44,38 @@ export interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+}
+
+// **Form Interfaces**
+export interface Field<T> {
+  label: string;
+  name: keyof T;
+  type: string;
+  placeholder?: string;
+  icon?: JSX.Element;
+}
+
+export type FormProps<T> = {
+  schema: z.ZodSchema<T>;
+  onSubmit: (data: T) => void;
+  isPending: boolean;
+  isError: boolean;
+  error: Error | null;
+  fields: Field<T>[];
+  formType: 'create' | 'update';
+  buttonText: {submit: string; cancel: string};
+  formTitle: string;
+};
+
+// **Sidebar Interfaces**
+export interface SidebarProps {
+  sidebarOpen: boolean;
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface SidebarLinkGroupProps {
+  children: (handleClick: () => void, open: boolean) => ReactNode;
+  activeCondition: boolean;
 }
 
 // **Table Interfaces**
@@ -131,7 +152,8 @@ export interface SearchOrGetAllCaterorsParams {
   query?: string;
 }
 
-export interface CreateCaterorData {
+export interface CreateCaterorParams {
+  token: string;
   UserID: string;
 }
 
