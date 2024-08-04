@@ -179,7 +179,6 @@ export interface RawMaterialCategoryUpdateParams {
 export interface CreateRawMaterial {
   Name: string;
   CategoryID: string;
-  RawMaterialUnit: string;
   token: string;
 }
 

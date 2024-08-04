@@ -1,14 +1,18 @@
-import React from 'react'
-import CreateDish from '@/components/users/DishComponents/createDish';
+import {
+  CreateDish,
+  CreateRawMaterial,
+  CreateRawMaterialCategory,
+} from '@/components/Dish';
+import React from 'react';
 
-
-const DishManagement:React.FC = () => {
-
-
-  return( <div>
-            <CreateDish/>
-          </div>
-        )
+const DishManagement: React.FC = () => {
+  return (
+    <div>
+      <CreateRawMaterialCategory />
+      <CreateRawMaterial />
+      <CreateDish />
+    </div>
+  );
 };
 
 export default DishManagement;

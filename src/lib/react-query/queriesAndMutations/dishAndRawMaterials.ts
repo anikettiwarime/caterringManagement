@@ -75,12 +75,12 @@ const useSearchRawMaterialCategories = ({
   return useQuery({
     queryKey: [
       DISH_AND_RAW_MATERIAL_QUERY_KEYS.SEARCH_RAW_MATERIAL_CATEGORIES,
-      query,
       page,
       limit,
     ],
     queryFn: () => searchRawMaterialCategories({token, query, page, limit}),
     enabled: !!token,
+    refetchOnWindowFocus: true,
   });
 };
 
@@ -212,7 +212,7 @@ const useCreateDishCategory = () => {
   });
 };
 
-const useGetAllDishCategories = (p0: number, p1: number, { token, page, limit }: PaginationParams) => {
+const useGetAllDishCategories = ({token, page, limit}: PaginationParams) => {
   return useQuery({
     queryKey: [
       DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISH_CATEGORIES,

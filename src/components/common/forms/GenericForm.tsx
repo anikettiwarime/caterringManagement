@@ -2,14 +2,26 @@ import {z, ZodSchema} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useRouter} from '@tanstack/react-router';
 import {ReactNode} from 'react';
-import {useForm, FieldValues, UseFormProps, Path} from 'react-hook-form';
+import {
+  useForm,
+  FieldValues,
+  UseFormProps,
+  Path,
+  Controller,
+} from 'react-hook-form';
+import AsyncSelect from 'react-select/async';
 
 export interface Field<T> {
   label: string;
   name: keyof z.infer<ZodSchema<T>>;
-  type: 'text' | 'email' | 'password';
+  type: 'text' | 'email' | 'password' | 'select';
   placeholder: string;
   icon?: ReactNode;
+  options?: Array<{value: string; label: string}>;
+  isSearchable?: boolean;
+  loadOptions?: (
+    inputValue: string,
+  ) => Promise<Array<{value: string; label: string}>>;
 }
 
 interface GenericFormProps<T extends FieldValues> {
@@ -45,6 +57,7 @@ const GenericForm = <T extends FieldValues>({
     register,
     handleSubmit,
     formState: {errors},
+    control,
   } = useForm<T>({
     resolver: zodResolver(schema),
     defaultValues,
@@ -73,14 +86,38 @@ const GenericForm = <T extends FieldValues>({
                 {field.icon && (
                   <span className="absolute left-4.5 top-4">{field.icon}</span>
                 )}
-                <input
-                  className={`w-full rounded border bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary ${
-                    errors[field.name] ? 'border-danger' : 'border-stroke'
-                  }`}
-                  type={field.type}
-                  {...register(field.name as Path<T>)}
-                  placeholder={field.placeholder}
-                />
+                {field.type === 'select' ? (
+                  <Controller
+                    name={field.name as Path<T>}
+                    control={control}
+                    render={({field: {onChange, value}}) => (
+                      <AsyncSelect
+                        cacheOptions
+                        loadOptions={field.loadOptions}
+                        defaultOptions
+                        value={field.options?.find(
+                          (option) => option.value === value,
+                        )}
+                        onChange={(option) => onChange(option?.value)}
+                        placeholder={field.placeholder}
+                        isSearchable={field.isSearchable}
+                        classNamePrefix="react-select"
+                        className={`w-full rounded border bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary ${
+                          errors[field.name] ? 'border-danger' : 'border-stroke'
+                        }`}
+                      />
+                    )}
+                  />
+                ) : (
+                  <input
+                    className={`w-full rounded border bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary ${
+                      errors[field.name] ? 'border-danger' : 'border-stroke'
+                    }`}
+                    type={field.type}
+                    {...register(field.name as Path<T>)}
+                    placeholder={field.placeholder}
+                  />
+                )}
                 {errors[field.name] && (
                   <p className="text-red-500">
                     {errors[field.name]?.message as string}

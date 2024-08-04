@@ -162,14 +162,13 @@ const deleteRawMaterialCategory = async (data: IdAndToken) => {
 
 // Raw Material
 const createRawMaterial = async (data: CreateRawMaterial) => {
-  const {token, Name, CategoryID, RawMaterialUnit} = data;
+  const {token, Name, CategoryID} = data;
   try {
     const res = await api.post(
       '/raw-materials',
       {
         RawMaterialName: Name,
         RawMaterialCategoryID: CategoryID,
-        RawMaterialUnit,
       },
       {
         headers: {
@@ -335,7 +334,7 @@ const createDishCategory = async (data: CreateDishCategory) => {
   }
 };
 
-const getAllDishCategories = async (p0: number, p1: number, { token, page, limit }: PaginationParams) => {
+const getAllDishCategories = async ({token, page, limit}: PaginationParams) => {
   try {
     const res = await api.get('/dish/category', {
       headers: {
