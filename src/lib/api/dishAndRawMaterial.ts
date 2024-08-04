@@ -335,7 +335,7 @@ const createDishCategory = async (data: CreateDishCategory) => {
   }
 };
 
-const getAllDishCategories = async ({token, page, limit}: PaginationParams) => {
+const getAllDishCategories = async (p0: number, p1: number, { token, page, limit }: PaginationParams) => {
   try {
     const res = await api.get('/dish/category', {
       headers: {

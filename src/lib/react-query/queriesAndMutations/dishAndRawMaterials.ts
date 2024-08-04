@@ -212,7 +212,7 @@ const useCreateDishCategory = () => {
   });
 };
 
-const useGetAllDishCategories = ({token, page, limit}: PaginationParams) => {
+const useGetAllDishCategories = (p0: number, p1: number, { token, page, limit }: PaginationParams) => {
   return useQuery({
     queryKey: [
       DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISH_CATEGORIES,
