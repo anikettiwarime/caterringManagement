@@ -196,3 +196,15 @@ export interface CreateDishCategory {
   Name: string;
   token: string;
 }
+
+export interface DishCategoryUpdateParams {
+  token: string;
+  id: string;
+  Name: string;
+}
+
+export interface CreateDishParams {
+  Name: string;
+  CategoryID: string;
+  Description: string;
+}

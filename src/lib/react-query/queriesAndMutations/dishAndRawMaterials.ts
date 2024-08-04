@@ -18,6 +18,22 @@ import {
   getRawMaterialById,
   updateRawMaterial,
   deleteRawMaterial,
+
+  // Dish Category
+  createDishCategory,
+  getAllDishCategories,
+  searchDishCategories,
+  getDishCategoryById,
+  updateDishCategory,
+  deleteDishCategory,
+
+  // Dish
+  createDish,
+  getAllDishes,
+  searchDishes,
+  getDishById,
+  updateDish,
+  deleteDish,
 } from '../../api/dishAndRawMaterial';
 
 const useCreateRawMaterialCategory = () => {
@@ -183,6 +199,150 @@ const useDeleteRawMaterial = () => {
   });
 };
 
+// Dish Category
+const useCreateDishCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createDishCategory,
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISH_CATEGORIES],
+      });
+    },
+  });
+};
+
+const useGetAllDishCategories = ({token, page, limit}: PaginationParams) => {
+  return useQuery({
+    queryKey: [
+      DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISH_CATEGORIES,
+      page,
+      limit,
+    ],
+    queryFn: () => getAllDishCategories({token, page, limit}),
+    enabled: !!token,
+  });
+};
+
+const useSearchDishCategories = ({
+  token,
+  query,
+  page,
+  limit,
+}: PaginationParams) => {
+  return useQuery({
+    queryKey: [
+      DISH_AND_RAW_MATERIAL_QUERY_KEYS.SEARCH_DISH_CATEGORIES,
+      query,
+      page,
+      limit,
+    ],
+    queryFn: () => searchDishCategories({token, query, page, limit}),
+    enabled: !!token,
+  });
+};
+
+const useGetDishCategoryById = (data: IdAndToken) => {
+  const {token, id} = data;
+  return useQuery({
+    queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_DISH_CATEGORY_BY_ID, id],
+    queryFn: () => getDishCategoryById({token, id}),
+    enabled: !!token,
+  });
+};
+
+const useUpdateDishCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateDishCategory,
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISH_CATEGORIES],
+      });
+    },
+  });
+};
+
+const useDeleteDishCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteDishCategory,
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISH_CATEGORIES],
+      });
+    },
+  });
+};
+
+// Dish
+
+const useCreateDish = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createDish,
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISHES],
+      });
+    },
+  });
+};
+
+const useGetAllDishes = ({token, page, limit}: PaginationParams) => {
+  return useQuery({
+    queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISHES, page, limit],
+    queryFn: () => getAllDishes({token, page, limit}),
+    enabled: !!token,
+  });
+};
+
+const useSearchDishes = ({token, query, page, limit}: PaginationParams) => {
+  return useQuery({
+    queryKey: [
+      DISH_AND_RAW_MATERIAL_QUERY_KEYS.SEARCH_DISHES,
+      query,
+      page,
+      limit,
+    ],
+    queryFn: () => searchDishes({token, query, page, limit}),
+    enabled: !!token,
+  });
+};
+
+const useGetDishById = (data: IdAndToken) => {
+  const {token, id} = data;
+  return useQuery({
+    queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_DISH_BY_ID, id],
+    queryFn: () => getDishById({token, id}),
+    enabled: !!token,
+  });
+};
+
+const useUpdateDish = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateDish,
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISHES],
+      });
+    },
+  });
+};
+
+const useDeleteDish = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteDish,
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: [DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_DISHES],
+      });
+    },
+  });
+};
+
 export {
   useCreateRawMaterialCategory,
   useGetAllRawMaterialCategories,
@@ -199,5 +359,19 @@ export {
   useUpdateRawMaterial,
   useDeleteRawMaterial,
 
+  // DishCategory
+  useCreateDishCategory,
+  useGetAllDishCategories,
+  useSearchDishCategories,
+  useGetDishCategoryById,
+  useUpdateDishCategory,
+  useDeleteDishCategory,
+
   // Dish
+  useCreateDish,
+  useGetAllDishes,
+  useSearchDishes,
+  useGetDishById,
+  useUpdateDish,
+  useDeleteDish,
 };
