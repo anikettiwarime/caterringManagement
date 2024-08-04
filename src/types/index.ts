@@ -157,4 +157,9 @@ export interface CreateCaterorParams {
   UserID: string;
 }
 
+export interface CaterorParams {
+  token: string;
+  id: string;
+}
+
 export type GetAllCaterorsApiResponse = ApiResponse<CaterorsResponse>;

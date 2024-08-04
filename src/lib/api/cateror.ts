@@ -1,4 +1,5 @@
 import {
+  CaterorParams,
   CreateCaterorParams,
   GetAllCaterorsApiResponse,
   SearchOrGetAllCaterorsParams,
@@ -82,4 +83,49 @@ const searchCaterors = async ({
   }
 };
 
-export {createCateror, getAllCaterors, searchCaterors};
+const getCaterorById = async (data: CaterorParams) => {
+  const {token, id} = data;
+
+  try {
+    const res = await api.get(`/cateror/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(
+        error.response?.data?.message || 'Something went wrong with sign up',
+      );
+    }
+    throw error;
+  }
+};
+
+const deleteCateror = async (data: CaterorParams) => {
+  const {token, id} = data;
+  try {
+    const res = await api.delete(`/cateror/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(
+        error.response?.data?.message || 'Something went wrong with sign up',
+      );
+    }
+    throw error;
+  }
+};
+
+export {
+  createCateror,
+  getAllCaterors,
+  searchCaterors,
+  getCaterorById,
+  deleteCateror,
+};
