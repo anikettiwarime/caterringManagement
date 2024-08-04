@@ -1,6 +1,26 @@
 import React, {ReactNode} from 'react';
 import {z} from 'zod';
 
+// **Common Interfaces**
+export interface ApiResponse<T> {
+  statusCode: number;
+  status: boolean;
+  message: string;
+  data: T;
+}
+
+export interface PaginationParams {
+  token: string;
+  page?: number;
+  limit?: number;
+  query?: string;
+}
+
+export interface IdAndToken {
+  id: string;
+  token: string;
+}
+
 // **User and Auth Interfaces**
 export interface User {
   UserID: string;
@@ -23,14 +43,6 @@ export interface AuthContextType {
   setToken: React.Dispatch<React.SetStateAction<Token | null>>;
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-// **API Response Interfaces**
-export interface ApiResponse<T> {
-  statusCode: number;
-  status: boolean;
-  message: string;
-  data: T;
 }
 
 // **Pagination Interfaces**
@@ -145,21 +157,11 @@ export interface CaterorsResponse {
   currentPage: number;
 }
 
-export interface SearchOrGetAllCaterorsParams {
-  token: string;
-  page?: number;
-  limit?: number;
-  query?: string;
-}
+export type GetAllCaterorsApiResponse = ApiResponse<CaterorsResponse>;
 
 export interface CreateCaterorParams {
   token: string;
   UserID: string;
-}
-
-export interface CaterorParams {
-  token: string;
-  id: string;
 }
 
 // Raw Material Interfaces
@@ -172,18 +174,6 @@ export interface RawMaterialCategoryUpdateParams {
   token: string;
   id: string;
   Name: string;
-}
-
-export interface SearchOrGetAllParams {
-  token: string;
-  page?: number;
-  limit?: number;
-  query?: string;
-}
-
-export interface IdAndToken {
-  id: string;
-  token: string;
 }
 
 export interface CreateRawMaterial {
@@ -206,5 +196,3 @@ export interface CreateDishCategory {
   Name: string;
   token: string;
 }
-
-export type GetAllCaterorsApiResponse = ApiResponse<CaterorsResponse>;

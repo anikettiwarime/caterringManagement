@@ -1,7 +1,7 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {DISH_AND_RAW_MATERIAL_QUERY_KEYS} from '../queryKeys';
 
-import {IdAndToken, SearchOrGetAllParams} from '@/types';
+import {IdAndToken, PaginationParams} from '@/types';
 
 import {
   createRawMaterialCategory,
@@ -38,7 +38,7 @@ const useGetAllRawMaterialCategories = ({
   token,
   page,
   limit,
-}: SearchOrGetAllParams) => {
+}: PaginationParams) => {
   return useQuery({
     queryKey: [
       DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_RAW_MATERIAL_CATEGORIES,
@@ -55,7 +55,7 @@ const useSearchRawMaterialCategories = ({
   query,
   page,
   limit,
-}: SearchOrGetAllParams) => {
+}: PaginationParams) => {
   return useQuery({
     queryKey: [
       DISH_AND_RAW_MATERIAL_QUERY_KEYS.SEARCH_RAW_MATERIAL_CATEGORIES,
@@ -120,7 +120,7 @@ const useCreateRawMaterial = () => {
   });
 };
 
-const useGetAllRawMaterials = ({token, page, limit}: SearchOrGetAllParams) => {
+const useGetAllRawMaterials = ({token, page, limit}: PaginationParams) => {
   return useQuery({
     queryKey: [
       DISH_AND_RAW_MATERIAL_QUERY_KEYS.GET_ALL_RAW_MATERIALS,
@@ -137,7 +137,7 @@ const useSearchRawMaterials = ({
   query,
   page,
   limit,
-}: SearchOrGetAllParams) => {
+}: PaginationParams) => {
   return useQuery({
     queryKey: [
       DISH_AND_RAW_MATERIAL_QUERY_KEYS.SEARCH_RAW_MATERIALS,
@@ -198,4 +198,6 @@ export {
   useGetRawMaterialById,
   useUpdateRawMaterial,
   useDeleteRawMaterial,
+
+  // Dish
 };

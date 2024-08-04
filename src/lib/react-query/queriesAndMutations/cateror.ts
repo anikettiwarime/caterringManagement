@@ -1,10 +1,10 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {QUERY_KEYS} from '../queryKeys';
 import {
-  CaterorParams,
   CreateCaterorParams,
   GetAllCaterorsApiResponse,
-  SearchOrGetAllCaterorsParams,
+  IdAndToken,
+  PaginationParams,
 } from '@/types';
 import {
   createCateror,
@@ -27,11 +27,7 @@ const useCreateCateror = () => {
   });
 };
 
-const useGetAllCaterors = ({
-  token,
-  page,
-  limit,
-}: SearchOrGetAllCaterorsParams) => {
+const useGetAllCaterors = ({token, page, limit}: PaginationParams) => {
   return useQuery<GetAllCaterorsApiResponse>({
     queryKey: [QUERY_KEYS.GET_ALL_CATERORS, page, limit],
     queryFn: () => getAllCaterors({token, page, limit}),
@@ -39,19 +35,14 @@ const useGetAllCaterors = ({
   });
 };
 
-const useSearchCaterors = ({
-  token,
-  query,
-  page,
-  limit,
-}: SearchOrGetAllCaterorsParams) => {
+const useSearchCaterors = ({token, query, page, limit}: PaginationParams) => {
   return useQuery<GetAllCaterorsApiResponse>({
     queryKey: [QUERY_KEYS.SEARCH_CATERORS, query, page, limit],
     queryFn: () => searchCaterors({token, query, page, limit}),
     enabled: !!token,
   });
 };
-const useGetCaterorById = (data: CaterorParams) => {
+const useGetCaterorById = (data: IdAndToken) => {
   const {token, id} = data;
   return useQuery({
     queryKey: [QUERY_KEYS.GET_CATEROR_BY_ID, id],
@@ -63,7 +54,7 @@ const useGetCaterorById = (data: CaterorParams) => {
 const useDeleteCateror = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: CaterorParams) => deleteCateror(data),
+    mutationFn: deleteCateror,
     onSettled: () => {
       queryClient.invalidateQueries({queryKey: [QUERY_KEYS.GET_ALL_CATERORS]});
     },

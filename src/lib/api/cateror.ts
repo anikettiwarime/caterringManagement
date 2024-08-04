@@ -1,8 +1,8 @@
 import {
-  CaterorParams,
   CreateCaterorParams,
   GetAllCaterorsApiResponse,
-  SearchOrGetAllCaterorsParams,
+  IdAndToken,
+  PaginationParams,
 } from '@/types';
 import {api} from '@/utils/axios';
 import {AxiosError} from 'axios';
@@ -31,7 +31,7 @@ const getAllCaterors = async ({
   token,
   page,
   limit,
-}: SearchOrGetAllCaterorsParams): Promise<GetAllCaterorsApiResponse> => {
+}: PaginationParams): Promise<GetAllCaterorsApiResponse> => {
   try {
     const res = await api.get('/cateror', {
       headers: {
@@ -59,7 +59,7 @@ const searchCaterors = async ({
   query,
   page,
   limit,
-}: SearchOrGetAllCaterorsParams): Promise<GetAllCaterorsApiResponse> => {
+}: PaginationParams): Promise<GetAllCaterorsApiResponse> => {
   try {
     const res = await api.get('/cateror/search', {
       headers: {
@@ -83,7 +83,7 @@ const searchCaterors = async ({
   }
 };
 
-const getCaterorById = async (data: CaterorParams) => {
+const getCaterorById = async (data: IdAndToken) => {
   const {token, id} = data;
 
   try {
@@ -103,7 +103,7 @@ const getCaterorById = async (data: CaterorParams) => {
   }
 };
 
-const deleteCateror = async (data: CaterorParams) => {
+const deleteCateror = async (data: IdAndToken) => {
   const {token, id} = data;
   try {
     const res = await api.delete(`/cateror/${id}`, {

@@ -4,9 +4,9 @@ import {
   CreateRawMaterial,
   CreateRawMaterialCategory,
   IdAndToken,
+  PaginationParams,
   RawMaterialCategoryUpdateParams,
   RawMaterialUpdateParams,
-  SearchOrGetAllParams,
 } from '@/types';
 
 // Raw Material Category
@@ -40,7 +40,7 @@ const getAllRawMaterialCategories = async ({
   token,
   page,
   limit,
-}: SearchOrGetAllParams) => {
+}: PaginationParams) => {
   try {
     const res = await api.get('/raw-materials/category', {
       headers: {
@@ -68,7 +68,7 @@ const searchRawMaterialCategories = async ({
   query,
   page,
   limit,
-}: SearchOrGetAllParams) => {
+}: PaginationParams) => {
   try {
     const res = await api.get('/raw-materials/category', {
       headers: {Authorization: `Bearer ${token}`},
@@ -187,11 +187,7 @@ const createRawMaterial = async (data: CreateRawMaterial) => {
   }
 };
 
-const getAllRawMaterials = async ({
-  token,
-  page,
-  limit,
-}: SearchOrGetAllParams) => {
+const getAllRawMaterials = async ({token, page, limit}: PaginationParams) => {
   try {
     const res = await api.get('/raw-materials', {
       headers: {
@@ -219,7 +215,7 @@ const searchRawMaterials = async ({
   query,
   page,
   limit,
-}: SearchOrGetAllParams) => {
+}: PaginationParams) => {
   try {
     const res = await api.get('/raw-materials', {
       headers: {Authorization: `Bearer ${token}`},
