@@ -162,4 +162,49 @@ export interface CaterorParams {
   id: string;
 }
 
+// Raw Material Interfaces
+export interface CreateRawMaterialCategory {
+  Name: string;
+  token: string;
+}
+
+export interface RawMaterialCategoryUpdateParams {
+  token: string;
+  id: string;
+  Name: string;
+}
+
+export interface SearchOrGetAllParams {
+  token: string;
+  page?: number;
+  limit?: number;
+  query?: string;
+}
+
+export interface IdAndToken {
+  id: string;
+  token: string;
+}
+
+export interface CreateRawMaterial {
+  Name: string;
+  CategoryID: string;
+  RawMaterialUnit: string;
+  token: string;
+}
+
+export interface RawMaterialUpdateParams {
+  token: string;
+  id: string;
+  Name: string;
+  CategoryID: string;
+  RawMaterialUnit: string;
+}
+
+// Dish Category Interfaces
+export interface CreateDishCategory {
+  Name: string;
+  token: string;
+}
+
 export type GetAllCaterorsApiResponse = ApiResponse<CaterorsResponse>;
