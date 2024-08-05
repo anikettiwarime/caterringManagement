@@ -4,6 +4,7 @@ import {GenericForm } from '@/components/common/forms';
 import {dishValidationSchema } from '@/lib/validation/dishSchema';
 import {useCreateDish} from '@/lib/react-query/queriesAndMutations/dishAndRawMaterials';
 import {z} from 'zod';
+import { useAuthContext } from '@/context/AuthContext';
 
 type FormValues = z.infer<typeof dishValidationSchema>;
 
@@ -29,14 +30,15 @@ const fields: Field<FormValues>[] = [
 ];
 
 const CreateDish: React.FC = () => {
-  const {isError, isPending, error, mutateAsync: createDish} = useCreateDish();
 
-  const handleFormSubmit = async (data: FormValues) => {
+    const { isError, isPending, error, mutateAsync: createDish } = useCreateDish();
+
+
+    const handleFormSubmit = async (data: FormValues) => {
     console.log('Form submitted', data);
 
     try {
       const res = await createDish(data);
-
       console.log(res);
     } catch (error) {
       console.log(error);

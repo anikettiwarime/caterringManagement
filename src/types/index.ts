@@ -170,6 +170,15 @@ export interface CreateRawMaterialCategory {
   token: string;
 }
 
+export interface RawMaterials {
+
+  RawMaterialID:string
+  RawMaterialName: string
+  RawMaterialCategoryID:string
+  RawMaterialUnit:string
+
+}
+
 export interface RawMaterialCategoryUpdateParams {
   token: string;
   id: string;
@@ -207,4 +216,13 @@ export interface CreateDishParams {
   Name: string;
   CategoryID: string;
   Description: string;
+}
+
+export interface Dishes {
+
+  DishID: string;
+  DishName: string;
+  DishDescription: string;
+  DishCategoryID: string;
+
 }

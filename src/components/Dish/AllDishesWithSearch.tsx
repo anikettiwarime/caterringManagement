@@ -1,42 +1,45 @@
+import React from 'react';
 import {useCallback, useState} from 'react';
-import {DisplayTable} from '@/components/common/Tables';
-import {Column, Cateror} from '@/types';
-import {useSearchCaterors} from '@/lib/react-query/queriesAndMutations/cateror';
+import { DisplayTable } from '@/components/common/Tables'; 
+import {Column, Dishes,} from '@/types';
 import {useAuthContext} from '@/context/AuthContext';
 import {LoadingErrorNoData} from '@/components/Loader';
 import {useDebounceValue} from 'usehooks-ts';
+import { useSearchDishes } from '@/lib/react-query/queriesAndMutations/dishAndRawMaterials';
 
-const columns: Column<Cateror>[] = [
-  {header: 'Username', accessor: 'Username'},
-  {header: 'Email', accessor: 'Email'},
-  {header: 'Name', accessor: 'Name'},
-  {header: 'Phone Number', accessor: 'PhoneNo'},
-];
+const AllDishesWithSearch: React.FC = () => {
 
 
-const AllCaterorsWithSearch = () => {
-  const {token} = useAuthContext();
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
-  const [debouncedSearchQuery, setSearchQuery] = useDebounceValue<string>(
+    const columns: Column<Dishes>[] = [
+        {header: 'Dish ID', accessor: 'DishID'},
+        {header: 'Dish Name', accessor: 'DishName'},
+        {header: 'Dish Description', accessor: 'DishDescription'},
+        {header: 'Dish Category ID', accessor: 'DishCategoryID'},
+    ];
+    
+
+    const {token} = useAuthContext();
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+    const [debouncedSearchQuery, setSearchQuery] = useDebounceValue<string>(
     '',
     500,
-  );
+    );
+    
+    console.log('debouncedSearchQuery', debouncedSearchQuery);
 
-  console.log('debouncedSearchQuery', debouncedSearchQuery);
-
-  const {
-    data: caterorsResponse,
+    const {
+    data: dishesResponse,
     isLoading,
     isError,
-  } = useSearchCaterors({
+  } = useSearchDishes({
     token: token?.accessToken || '',
     page: currentPage,
     limit: itemsPerPage,
     query: debouncedSearchQuery,
   });
-
-  const handlePageChange = useCallback((newPage: number) => {
+    
+     const handlePageChange = useCallback((newPage: number) => {
     setCurrentPage(newPage);
   }, []);
 
@@ -62,21 +65,22 @@ const AllCaterorsWithSearch = () => {
     console.log('Delete', id);
   };
 
-  return (
-    <LoadingErrorNoData
-      isLoading={isLoading}
-      isError={isError}
-      errorMessage="Error loading caterors"
-      hasData={!!caterorsResponse?.data}
+
+    return (
+     <LoadingErrorNoData
+        isLoading={isLoading}
+        isError={isError}
+        errorMessage="Error loading dishes"
+        hasData={!!dishesResponse?.data}
     >
       <DisplayTable
         columns={columns}
-        data={caterorsResponse?.data.caterors || []}
-        idKey="CaterorID"
-        title="Caterors"
+        data={dishesResponse?.data.dishes || []}
+        idKey="DishID"
+        title="Dishes"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
-        totalPages={caterorsResponse?.data.totalPages || 1}
+        totalPages={dishesResponse?.data.totalPages || 1}
         pageOptions={[5, 10, 20]}
         searchQuery={debouncedSearchQuery}
         onSearchChange={handleSearchChange}
@@ -87,7 +91,7 @@ const AllCaterorsWithSearch = () => {
         onDelete={handleDelete}
       />
     </LoadingErrorNoData>
-  );
-};
+)
+}
 
-export default AllCaterorsWithSearch;
+export default AllDishesWithSearch
