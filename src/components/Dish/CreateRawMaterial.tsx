@@ -72,12 +72,25 @@ const CreateRawMaterial: React.FC = () => {
       type: 'text',
     },
     {
-      label: 'Choose Raw Material Category',
+      label: 'Category',
       name: 'CategoryID',
-      placeholder: 'Category',
+      placeholder: 'Category Name',
       type: 'select',
       isSearchable: true,
       loadOptions,
+    },
+    {
+      label: 'Unit',
+      name: 'Unit',
+      placeholder: 'Unit',
+      type: 'select',
+      options: [
+        {value: 'kg', label: 'kg'},
+        {value: 'g', label: 'g'},
+        {value: 'l', label: 'l'},
+        {value: 'ml', label: 'ml'},
+      ],
+      isSearchable: false,
     },
   ];
 

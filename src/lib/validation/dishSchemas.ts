@@ -13,6 +13,9 @@ const rawMaterialValidationSchema = z.object({
   CategoryID: z.string({
     required_error: 'Category Id is required',
   }),
+  Unit: z.enum(['kg', 'g', 'l', 'ml'], {
+    message: 'Unit must be kg, g, l or ml',
+  }),
 });
 
 const dishCategoryValidationSchema = z.object({
