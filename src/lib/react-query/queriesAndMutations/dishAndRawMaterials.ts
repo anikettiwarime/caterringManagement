@@ -75,12 +75,12 @@ const useSearchRawMaterialCategories = ({
   return useQuery({
     queryKey: [
       DISH_AND_RAW_MATERIAL_QUERY_KEYS.SEARCH_RAW_MATERIAL_CATEGORIES,
-      query,
       page,
       limit,
     ],
     queryFn: () => searchRawMaterialCategories({token, query, page, limit}),
     enabled: !!token,
+    refetchOnWindowFocus: true,
   });
 };
 

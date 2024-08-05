@@ -162,14 +162,14 @@ const deleteRawMaterialCategory = async (data: IdAndToken) => {
 
 // Raw Material
 const createRawMaterial = async (data: CreateRawMaterial) => {
-  const {token, Name, CategoryID, RawMaterialUnit} = data;
+  const {token, Name, CategoryID, Unit} = data;
   try {
     const res = await api.post(
       '/raw-materials',
       {
         RawMaterialName: Name,
         RawMaterialCategoryID: CategoryID,
-        RawMaterialUnit,
+        RawMaterialUnit: Unit,
       },
       {
         headers: {
