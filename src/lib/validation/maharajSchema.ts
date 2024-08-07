@@ -17,6 +17,9 @@ const maharajSchema = z.object({
   specialization: z
     .array(z.string())
     .min(1, { message: 'At least one specialization is required' }),
+    password: z
+    .string({ required_error: 'Password is required' })
+    .min(8, { message: 'Password must be at least 8 characters long' }),
 });
 
 export { maharajSchema };

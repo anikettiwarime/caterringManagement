@@ -16,17 +16,23 @@ const fields: Field<FormValues>[] = [
         placeholder: 'Enter your name',
         type: 'text',
       },
+      {
+        label: 'Email',
+        name: 'email',
+        placeholder: 'Enter your email',
+        type: 'email',
+      },
+      {
+        label: 'Username',
+        name: 'username',
+        placeholder: 'Enter your username',
+        type: 'text',
+      },
     {
-      label: 'Username',
-      name: 'username',
-      placeholder: 'Enter your username',
-      type: 'text',
-    },
-    {
-      label: 'Email',
-      name: 'email',
-      placeholder: 'Enter your email',
-      type: 'email',
+      label: 'Password',
+      name: 'password',
+      placeholder: 'Enter your Password',
+      type: 'password',
     },
     
     {
