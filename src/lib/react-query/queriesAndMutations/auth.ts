@@ -36,7 +36,8 @@ const useSignUp = () => {
 const useSignOut = () => {
   return useMutation({
     mutationFn: () => {
-      const token = localStorage.getItem(QUERY_KEYS.TOKEN);
+      const Token = localStorage.getItem(QUERY_KEYS.TOKEN);
+      const token = Token ? JSON.parse(Token).accessToken : null;
       if (!token) {
         throw new Error('No token found');
       }
@@ -45,6 +46,7 @@ const useSignOut = () => {
 
     onSuccess: () => {
       localStorage.removeItem(QUERY_KEYS.TOKEN);
+      window.location.reload();
     },
 
     onError: (error) => {
