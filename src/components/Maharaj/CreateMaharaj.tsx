@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import {Field} from '@/components/common/forms/GenericForm';
 import {GenericForm} from '@/components/common/forms';
@@ -95,3 +96,71 @@ const CreateMaharaj: React.FC = () => {
 };
 
 export default CreateMaharaj;
+=======
+import React from 'react'
+import { GenericForm } from '../common/forms'
+import { Field } from '../common/forms/GenericForm';
+import { maharajSchema } from '@/lib/validation/maharajSchema';
+import { z } from 'zod';
+
+const CreateMaharaj:React.FC = () => {
+
+type FormValues = z.infer<typeof maharajSchema>;
+
+
+const fields: Field<FormValues>[] = [
+    {
+        label: 'Name',
+        name: 'name',
+        placeholder: 'Enter your name',
+        type: 'text',
+      },
+      {
+        label: 'Email',
+        name: 'email',
+        placeholder: 'Enter your email',
+        type: 'email',
+      },
+      {
+        label: 'Username',
+        name: 'username',
+        placeholder: 'Enter your username',
+        type: 'text',
+      },
+    {
+      label: 'Password',
+      name: 'password',
+      placeholder: 'Enter your Password',
+      type: 'password',
+    },
+    
+    {
+      label: 'Phone Number',
+      name: 'phoneNo',
+      placeholder: 'Enter your phone number',
+      type: 'text',
+    },
+    {
+      label: 'Specialization',
+      name: 'specialization',
+      placeholder: 'Enter your specialization',
+      type: 'text',
+    },
+  ];
+  return (
+    <GenericForm<FormValues>
+    schema={maharajSchema}
+    // onSubmit={}
+    // isPending={}
+    // isError={}
+    // error={}
+    fields={fields}
+    formType="create"
+    buttonText={{submit: 'Create', cancel: 'Cancel'}}
+    formTitle="Create Maharaj"
+  />
+  )
+}
+
+export default CreateMaharaj
+>>>>>>> c9db49500851597b4a6ffa811770b2e1ae374450
