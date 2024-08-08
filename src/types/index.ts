@@ -241,7 +241,7 @@ export interface TabTypes {
 export interface VerticalTabPropsTypes {
   // handleComponentConditionaly: (value: string) => void;
   tabData: TabTypes[];
-  setJsxElement: (element: any) => void;
+  setJsxElement: (element: React.JSX.Element) => void;
   // jsxElement:JSX.Element
 }
 

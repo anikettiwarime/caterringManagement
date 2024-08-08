@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Breadcrumb from '@/components/Breadcrumbs';
 import {VerticalTab} from '@/components/VerticalTab';
 import {clientConditonalRender} from '@/components/Client/CreateClientRouting';
 
@@ -8,7 +7,6 @@ const Client: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-270">
-      <Breadcrumb />
       <div className="grid grid-cols-8">
         <div className="col-span-2">
           <VerticalTab

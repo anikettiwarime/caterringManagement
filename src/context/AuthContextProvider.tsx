@@ -10,7 +10,9 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
-    const localToken = JSON.parse(localStorage.getItem(QUERY_KEYS.TOKEN) || 'null');
+    const localToken = JSON.parse(
+      localStorage.getItem(QUERY_KEYS.TOKEN) || 'null',
+    );
 
     if (localToken) {
       const decodedToken = jwtDecode(localToken.accessToken) as User;
