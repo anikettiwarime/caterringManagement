@@ -43,15 +43,13 @@ const fields: Field<FormValues>[] = [
     placeholder: 'Enter your password',
   },
   {
-    label: 'Are you vegeterian',
     name: 'isVeg',
-    type: 'text',
+    type: 'checkbox',
     placeholder: 'Are you vegeterian',
   },
   {
-    label: 'Do you belong from jain?',
     name: 'isJain',
-    type: 'text',
+    type: 'checkbox',
     placeholder: 'Do you belong from jain?',
   },
   {

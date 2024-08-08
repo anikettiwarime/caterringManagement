@@ -10,10 +10,10 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem(QUERY_KEYS.TOKEN) || 'null');
+    const localToken = JSON.parse(localStorage.getItem(QUERY_KEYS.TOKEN) || 'null');
 
-    if (token) {
-      const decodedToken = jwtDecode(token.accessToken) as User;
+    if (localToken) {
+      const decodedToken = jwtDecode(localToken.accessToken) as User;
 
       if (decodedToken.exp && decodedToken.exp * 1000 < Date.now()) {
         localStorage.removeItem(QUERY_KEYS.TOKEN);

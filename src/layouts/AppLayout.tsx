@@ -7,9 +7,6 @@ import {useState} from 'react';
 const AppLayout = () => {
   const {isAuthenticated} = useAuthContext();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-
-  console.log(isAuthenticated);
-
   if (!isAuthenticated) {
     return <Navigate to="/signin" />;
   }
