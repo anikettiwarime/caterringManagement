@@ -1,6 +1,6 @@
 import {useAuthContext} from '@/context/AuthContext';
-import {Link, Navigate, Outlet} from '@tanstack/react-router';
-
+import { Link, Navigate, Outlet } from '@tanstack/react-router';
+import MenuImage1 from "../assets/images/logo/MenuImage1.jpg"
 import LogoDark from '../assets/images/logo/logo-dark.svg';
 import Logo from '../assets/images/logo/logo.svg';
 import {AuthIcon} from '@/components/Icons';
@@ -20,13 +20,8 @@ const AuthLayout = () => {
         <div className="hidden w-full xl:block xl:w-1/2">
           <div className="px-26 py-17.5 text-center">
             <Link className="mb-5.5 inline-block" to="/">
-              <img className="hidden dark:block" src={Logo} alt="Logo" />
-              <img className="dark:hidden" src={LogoDark} alt="Logo" />
+              <img className="dark:block w-50" src={MenuImage1} alt="Logo" />
             </Link>
-            <p className="2xl:px-20">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
-              suspendisse.
-            </p>
             <AuthIcon />
           </div>
         </div>

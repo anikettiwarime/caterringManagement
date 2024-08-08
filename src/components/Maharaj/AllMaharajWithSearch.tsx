@@ -1,18 +1,18 @@
 import React from 'react';
 import {useCallback, useState} from 'react';
 import {DisplayTable} from '@/components/common/Tables';
-import {Column, Dishes} from '@/types';
+import {Column, RawMaterials} from '@/types';
 import {useAuthContext} from '@/context/AuthContext';
 import {LoadingErrorNoData} from '@/components/Loader';
 import {useDebounceValue} from 'usehooks-ts';
-import {useSearchDishes} from '@/lib/react-query/queriesAndMutations/dishAndRawMaterials';
+import {useSearchMaharaj} from '@/lib/react-query/queriesAndMutations/maharaj';
 
-const AllDishesWithSearch: React.FC = () => {
-  const columns: Column<Dishes>[] = [
-    {header: 'Dish ID', accessor: 'DishID'},
-    {header: 'Dish Name', accessor: 'DishName'},
-    {header: 'Dish Description', accessor: 'DishDescription'},
-    {header: 'Dish Category ID', accessor: 'DishCategoryID'},
+const AllMaharajWithSearch: React.FC = () => {
+  const columns: Column<RawMaterials>[] = [
+    {header: 'RawMaterialID', accessor: 'RawMaterialID'},
+    {header: 'RawMaterialName', accessor: 'RawMaterialName'},
+    {header: 'RawMaterialCategoryID', accessor: 'RawMaterialCategoryID'},
+    {header: 'RawMaterialUnit', accessor: 'RawMaterialUnit'},
   ];
 
   const {token} = useAuthContext();
@@ -26,10 +26,10 @@ const AllDishesWithSearch: React.FC = () => {
   console.log('debouncedSearchQuery', debouncedSearchQuery);
 
   const {
-    data: dishesResponse,
+    data: maharajResponse,
     isLoading,
     isError,
-  } = useSearchDishes({
+  } = useSearchMaharaj({
     token: token?.accessToken || '',
     page: currentPage,
     limit: itemsPerPage,
@@ -66,17 +66,17 @@ const AllDishesWithSearch: React.FC = () => {
     <LoadingErrorNoData
       isLoading={isLoading}
       isError={isError}
-      errorMessage="Error loading dishes"
-      hasData={!!dishesResponse?.data}
+      errorMessage="Error loading raw materials"
+      hasData={!!maharajResponse?.data}
     >
       <DisplayTable
         columns={columns}
-        data={dishesResponse?.data.dishes || []}
-        idKey="DishID"
-        title="Dishes"
+        data={maharajResponse?.data.dishes || []}
+        idKey="RawMaterialID"
+        title="RawMaterial"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
-        totalPages={dishesResponse?.data.totalPages || 1}
+        totalPages={maharajResponse?.data.totalPages || 1}
         pageOptions={[5, 10, 20]}
         searchQuery={debouncedSearchQuery}
         onSearchChange={handleSearchChange}
@@ -90,4 +90,4 @@ const AllDishesWithSearch: React.FC = () => {
   );
 };
 
-export default AllDishesWithSearch;
+export default AllMaharajWithSearch;
