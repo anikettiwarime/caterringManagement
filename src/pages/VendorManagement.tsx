@@ -1,18 +1,17 @@
 import Breadcrumb from '@/components/Breadcrumbs'
-import { AllMaharajWithSearch, CreateMaharaj } from '@/components/Maharaj'
-import React from 'react'
+import { AllVendorsWithSearch, CreateVendor } from '@/components/Vendor'
 
-const MaharajManagement = () => {
+const VendorManagement = () => {
   return (
     <div>
       <div className="mx-auto max-w-270">
       <Breadcrumb />
       <div className="grid grid-cols-8 gap-8">
         <div className="col-span-8">
-          <CreateMaharaj />
+          <CreateVendor />
         </div>
         <div className="col-span-8">
-          <AllMaharajWithSearch />
+          <AllVendorsWithSearch />
         </div>
       </div>
     </div>
@@ -20,4 +19,4 @@ const MaharajManagement = () => {
   )
 }
 
-export default MaharajManagement
+export default VendorManagement
