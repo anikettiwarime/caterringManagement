@@ -1,14 +1,10 @@
 import {useAuthContext} from '@/context/AuthContext';
 import {Link, Navigate, Outlet} from '@tanstack/react-router';
 import MenuImage1 from '../assets/images/logo/MenuImage1.jpg';
-import LogoDark from '../assets/images/logo/logo-dark.svg';
-import Logo from '../assets/images/logo/logo.svg';
 import {AuthIcon} from '@/components/Icons';
 
 const AuthLayout = () => {
   const {isAuthenticated} = useAuthContext();
-
-  console.log(isAuthenticated + ' AuthLayout');
 
   if (isAuthenticated) {
     return <Navigate to="/" />;
