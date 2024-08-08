@@ -1,34 +1,31 @@
 import React from 'react';
 import {useCallback, useState} from 'react';
-import { DisplayTable } from '@/components/common/Tables'; 
-import {Column, RawMaterials,} from '@/types';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column, RawMaterials} from '@/types';
 import {useAuthContext} from '@/context/AuthContext';
 import {LoadingErrorNoData} from '@/components/Loader';
 import {useDebounceValue} from 'usehooks-ts';
-import {useSearchRawMaterials } from '@/lib/react-query/queriesAndMutations/dishAndRawMaterials';
+import {useSearchRawMaterials} from '@/lib/react-query/queriesAndMutations/dishAndRawMaterials';
 
 const AllRawMaterialWithSearch: React.FC = () => {
+  const columns: Column<RawMaterials>[] = [
+    {header: 'RawMaterialID', accessor: 'RawMaterialID'},
+    {header: 'RawMaterialName', accessor: 'RawMaterialName'},
+    {header: 'RawMaterialCategoryID', accessor: 'RawMaterialCategoryID'},
+    {header: 'RawMaterialUnit', accessor: 'RawMaterialUnit'},
+  ];
 
-
-    const columns: Column<RawMaterials>[] = [
-        {header: 'RawMaterialID', accessor: 'RawMaterialID'},
-        {header: 'RawMaterialName', accessor: 'RawMaterialName'},
-        {header: 'RawMaterialCategoryID', accessor: 'RawMaterialCategoryID'},
-        {header: 'RawMaterialUnit', accessor: 'RawMaterialUnit'},
-    ];
-    
-
-    const {token} = useAuthContext();
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(5);
-    const [debouncedSearchQuery, setSearchQuery] = useDebounceValue<string>(
+  const {token} = useAuthContext();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+  const [debouncedSearchQuery, setSearchQuery] = useDebounceValue<string>(
     '',
     500,
-    );
-    
-    console.log('debouncedSearchQuery', debouncedSearchQuery);
+  );
 
-    const {
+  console.log('debouncedSearchQuery', debouncedSearchQuery);
+
+  const {
     data: rawMaterialResponse,
     isLoading,
     isError,
@@ -38,8 +35,8 @@ const AllRawMaterialWithSearch: React.FC = () => {
     limit: itemsPerPage,
     query: debouncedSearchQuery,
   });
-    
-     const handlePageChange = useCallback((newPage: number) => {
+
+  const handlePageChange = useCallback((newPage: number) => {
     setCurrentPage(newPage);
   }, []);
 
@@ -65,15 +62,14 @@ const AllRawMaterialWithSearch: React.FC = () => {
     console.log('Delete', id);
   };
 
-
-    return (
-     <LoadingErrorNoData
-        isLoading={isLoading}
-        isError={isError}
-        errorMessage="Error loading raw materials"
-        hasData={!!rawMaterialResponse?.data}
+  return (
+    <LoadingErrorNoData
+      isLoading={isLoading}
+      isError={isError}
+      errorMessage="Error loading raw materials"
+      hasData={!!rawMaterialResponse?.data}
     >
-     <DisplayTable
+      <DisplayTable
         columns={columns}
         data={rawMaterialResponse?.data.dishes || []}
         idKey="RawMaterialID"
@@ -89,9 +85,9 @@ const AllRawMaterialWithSearch: React.FC = () => {
         onDetail={handleDetail}
         onEdit={handleEdit}
         onDelete={handleDelete}
-    />
+      />
     </LoadingErrorNoData>
-)
-}
+  );
+};
 
-export default AllRawMaterialWithSearch
+export default AllRawMaterialWithSearch;

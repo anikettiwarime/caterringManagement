@@ -1,6 +1,5 @@
 import Breadcrumb from '@/components/Breadcrumbs'
-import { AllMaharajWithSearch, CreateMaharaj } from '@/components/Maharaj'
-import React from 'react'
+import {AllMaharajWithSearch, CreateMaharaj} from '@/components/Maharaj'
 
 const MaharajManagement = () => {
   return (

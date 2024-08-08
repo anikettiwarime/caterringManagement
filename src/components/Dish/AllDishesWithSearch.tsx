@@ -1,34 +1,31 @@
 import React from 'react';
 import {useCallback, useState} from 'react';
-import { DisplayTable } from '@/components/common/Tables'; 
-import {Column, Dishes,} from '@/types';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column, Dishes} from '@/types';
 import {useAuthContext} from '@/context/AuthContext';
 import {LoadingErrorNoData} from '@/components/Loader';
 import {useDebounceValue} from 'usehooks-ts';
-import { useSearchDishes } from '@/lib/react-query/queriesAndMutations/dishAndRawMaterials';
+import {useSearchDishes} from '@/lib/react-query/queriesAndMutations/dishAndRawMaterials';
 
 const AllDishesWithSearch: React.FC = () => {
+  const columns: Column<Dishes>[] = [
+    {header: 'Dish ID', accessor: 'DishID'},
+    {header: 'Dish Name', accessor: 'DishName'},
+    {header: 'Dish Description', accessor: 'DishDescription'},
+    {header: 'Dish Category ID', accessor: 'DishCategoryID'},
+  ];
 
-
-    const columns: Column<Dishes>[] = [
-        {header: 'Dish ID', accessor: 'DishID'},
-        {header: 'Dish Name', accessor: 'DishName'},
-        {header: 'Dish Description', accessor: 'DishDescription'},
-        {header: 'Dish Category ID', accessor: 'DishCategoryID'},
-    ];
-    
-
-    const {token} = useAuthContext();
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(5);
-    const [debouncedSearchQuery, setSearchQuery] = useDebounceValue<string>(
+  const {token} = useAuthContext();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+  const [debouncedSearchQuery, setSearchQuery] = useDebounceValue<string>(
     '',
     500,
-    );
-    
-    console.log('debouncedSearchQuery', debouncedSearchQuery);
+  );
 
-    const {
+  console.log('debouncedSearchQuery', debouncedSearchQuery);
+
+  const {
     data: dishesResponse,
     isLoading,
     isError,
@@ -38,8 +35,8 @@ const AllDishesWithSearch: React.FC = () => {
     limit: itemsPerPage,
     query: debouncedSearchQuery,
   });
-    
-     const handlePageChange = useCallback((newPage: number) => {
+
+  const handlePageChange = useCallback((newPage: number) => {
     setCurrentPage(newPage);
   }, []);
 
@@ -65,13 +62,12 @@ const AllDishesWithSearch: React.FC = () => {
     console.log('Delete', id);
   };
 
-
-    return (
-     <LoadingErrorNoData
-        isLoading={isLoading}
-        isError={isError}
-        errorMessage="Error loading dishes"
-        hasData={!!dishesResponse?.data}
+  return (
+    <LoadingErrorNoData
+      isLoading={isLoading}
+      isError={isError}
+      errorMessage="Error loading dishes"
+      hasData={!!dishesResponse?.data}
     >
       <DisplayTable
         columns={columns}
@@ -91,7 +87,7 @@ const AllDishesWithSearch: React.FC = () => {
         onDelete={handleDelete}
       />
     </LoadingErrorNoData>
-)
-}
+  );
+};
 
-export default AllDishesWithSearch
+export default AllDishesWithSearch;

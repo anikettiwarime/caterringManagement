@@ -1,12 +1,14 @@
 import React from 'react';
-import { Field } from '@/components/common/forms/GenericForm';
-import { GenericForm } from '@/components/common/forms';
-import { z } from 'zod';
-import { FiMail, FiPhone, FiUser } from 'react-icons/fi';
-import { maharajValidationSchema } from '@/lib/validation/maharajSchemas';
-import { useCreateMaharaj } from '@/lib/react-query/queriesAndMutations/maharaj';
+import {z} from 'zod';
+import {FiMail, FiPhone, FiUser} from 'react-icons/fi';
+import {Field} from '../common/forms/GenericForm';
+import {useAuthContext} from '@/context/AuthContext';
+import GenericForm from '../common/forms/GenericForm';
+import { staffValidationSchema } from '@/lib/validation/staffSchemas';
+import { useCreateStaff } from '@/lib/react-query/queriesAndMutations/staff';
 
-type FormValues = z.infer<typeof maharajValidationSchema>;
+
+type FormValues = z.infer<typeof staffValidationSchema>;
 
 const fields: Field<FormValues>[] = [
   {
@@ -43,52 +45,59 @@ const fields: Field<FormValues>[] = [
     placeholder: 'Enter your password',
   },
   {
-    label: 'Specialization',
-    name: 'specialization',
+    label: 'Job Type',
+    name: 'jobType',
     type: 'text',
-    placeholder: 'Enter your Specialization',
+    placeholder: 'Enter your Job type',
   },
   {
-    label: 'Experience',
-    name: 'experience',
+    label: 'Address',
+    name: 'address',
     type: 'text',
-    placeholder: 'Enter your Experience',
+    placeholder: 'Enter your address',
   },
   {
     label: 'CaterorID',
     name: 'caterorID',
     type: 'text',
-    placeholder: 'Enter your Cateror ID',
+    placeholder: 'Enter your Cateror Id',
   },
 ];
 
-const CreateMaharaj: React.FC = () => {
-  const { isError, isPending, error, mutateAsync: createMaharaj } = useCreateMaharaj();
+
+const CreateStaff: React.FC = () => {
+  const {
+    isError,
+    isPending,
+    error,
+    mutateAsync: createStaff,
+  } = useCreateStaff();
+  const {token} = useAuthContext();
 
   const handleFormSubmit = async (data: FormValues) => {
     console.log('Form submitted', data);
 
     try {
-      const res = await createMaharaj(data);
+      const res = await createStaff(data);
       console.log(res);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
   return (
     <GenericForm<FormValues>
-      schema={maharajValidationSchema}
+      schema={staffValidationSchema}
       onSubmit={handleFormSubmit}
       isPending={isPending}
       isError={isError}
       error={error}
       fields={fields}
       formType="create"
-      buttonText={{ submit: 'Create', cancel: 'Cancel' }}
-      formTitle="Create Maharaj"
+      buttonText={{submit: 'Create', cancel: 'Cancel'}}
+      formTitle="Create Staff"
     />
   );
 };
 
-export default CreateMaharaj;
+export default CreateStaff;

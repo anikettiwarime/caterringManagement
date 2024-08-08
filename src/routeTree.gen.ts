@@ -19,6 +19,9 @@ import { Route as IndexImport } from './routes/index'
 import { Route as AuthSignupImport } from './routes/_auth/signup'
 import { Route as AuthSigninImport } from './routes/_auth/signin'
 import { Route as AppDashboardImport } from './routes/_app/dashboard'
+import { Route as AppUsersStaffImport } from './routes/_app/users/staff'
+import { Route as AppUsersMaharajImport } from './routes/_app/users/maharaj'
+import { Route as AppUsersClientImport } from './routes/_app/users/client'
 import { Route as AppUsersCaterorImport } from './routes/_app/users/cateror'
 
 // Create Virtual Routes
@@ -63,6 +66,21 @@ const AppUsersDishLazyRoute = AppUsersDishLazyImport.update({
 } as any).lazy(() =>
   import('./routes/_app/users/dish.lazy').then((d) => d.Route),
 )
+
+const AppUsersStaffRoute = AppUsersStaffImport.update({
+  path: '/users/staff',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppUsersMaharajRoute = AppUsersMaharajImport.update({
+  path: '/users/maharaj',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppUsersClientRoute = AppUsersClientImport.update({
+  path: '/users/client',
+  getParentRoute: () => AppRoute,
+} as any)
 
 const AppUsersCaterorRoute = AppUsersCaterorImport.update({
   path: '/users/cateror',
@@ -122,6 +140,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppUsersCaterorImport
       parentRoute: typeof AppImport
     }
+    '/_app/users/client': {
+      id: '/_app/users/client'
+      path: '/users/client'
+      fullPath: '/users/client'
+      preLoaderRoute: typeof AppUsersClientImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/users/maharaj': {
+      id: '/_app/users/maharaj'
+      path: '/users/maharaj'
+      fullPath: '/users/maharaj'
+      preLoaderRoute: typeof AppUsersMaharajImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/users/staff': {
+      id: '/_app/users/staff'
+      path: '/users/staff'
+      fullPath: '/users/staff'
+      preLoaderRoute: typeof AppUsersStaffImport
+      parentRoute: typeof AppImport
+    }
     '/_app/users/dish': {
       id: '/_app/users/dish'
       path: '/users/dish'
@@ -139,6 +178,9 @@ export const routeTree = rootRoute.addChildren({
   AppRoute: AppRoute.addChildren({
     AppDashboardRoute,
     AppUsersCaterorRoute,
+    AppUsersClientRoute,
+    AppUsersMaharajRoute,
+    AppUsersStaffRoute,
     AppUsersDishLazyRoute,
   }),
   AuthRoute: AuthRoute.addChildren({ AuthSigninRoute, AuthSignupRoute }),
@@ -165,6 +207,9 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/_app/dashboard",
         "/_app/users/cateror",
+        "/_app/users/client",
+        "/_app/users/maharaj",
+        "/_app/users/staff",
         "/_app/users/dish"
       ]
     },
@@ -189,6 +234,18 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_app/users/cateror": {
       "filePath": "_app/users/cateror.tsx",
+      "parent": "/_app"
+    },
+    "/_app/users/client": {
+      "filePath": "_app/users/client.tsx",
+      "parent": "/_app"
+    },
+    "/_app/users/maharaj": {
+      "filePath": "_app/users/maharaj.tsx",
+      "parent": "/_app"
+    },
+    "/_app/users/staff": {
+      "filePath": "_app/users/staff.tsx",
       "parent": "/_app"
     },
     "/_app/users/dish": {

@@ -1,35 +1,29 @@
-import React, { useCallback, useState } from 'react';
-import { DisplayTable } from '@/components/common/Tables';
-import { Column } from '@/types';
-import { useAuthContext } from '@/context/AuthContext';
-import { LoadingErrorNoData } from '@/components/Loader';
-import { useDebounceValue } from 'usehooks-ts';
-import { useSearchMaharaj } from '@/lib/react-query/queriesAndMutations/maharaj';
+import React from 'react';
+import {useCallback, useState} from 'react';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column, RawMaterials} from '@/types';
+import {useAuthContext} from '@/context/AuthContext';
+import {LoadingErrorNoData} from '@/components/Loader';
+import {useDebounceValue} from 'usehooks-ts';
+import {useSearchMaharaj} from '@/lib/react-query/queriesAndMutations/maharaj';
 
-// Define the Maharaj interface
-interface Maharaj {
-  name: string;
-  username: string;
-  email: string;
-  PhoneNo: number;
-  specialization: string;
-}
+const AllRawMaterialWithSearch: React.FC = () => {
+  const columns: Column<RawMaterials>[] = [
+    {header: 'RawMaterialID', accessor: 'RawMaterialID'},
+    {header: 'RawMaterialName', accessor: 'RawMaterialName'},
+    {header: 'RawMaterialCategoryID', accessor: 'RawMaterialCategoryID'},
+    {header: 'RawMaterialUnit', accessor: 'RawMaterialUnit'},
+  ];
 
-// Define columns for the Maharaj table
-const columns: Column<Maharaj>[] = [
-  { header: 'Name', accessor: 'name' },
-  { header: 'Username', accessor: 'username' },
-  { header: 'Email', accessor: 'email' },
-  { header: 'Phone Number', accessor: 'PhoneNo' },
-  { header: 'Specialization', accessor: 'specialization' },
-];
-
-const AllMaharajWithSearch: React.FC = () => {
-  const { token } = useAuthContext();
+  const {token} = useAuthContext();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const debouncedSearchQuery = useDebounceValue<string>(searchQuery, 500);
+  const [debouncedSearchQuery, setSearchQuery] = useDebounceValue<string>(
+    '',
+    500,
+  );
+
+  console.log('debouncedSearchQuery', debouncedSearchQuery);
 
   const {
     data: maharajResponse,
@@ -72,14 +66,14 @@ const AllMaharajWithSearch: React.FC = () => {
     <LoadingErrorNoData
       isLoading={isLoading}
       isError={isError}
-      errorMessage="Error loading maharajs"
+      errorMessage="Error loading raw materials"
       hasData={!!maharajResponse?.data}
     >
       <DisplayTable
         columns={columns}
-        data={maharajResponse?.data.maharajs || []}
-        idKey="username"  // Use a unique key for the row
-        title="Maharajs"
+        data={maharajResponse?.data.dishes || []}
+        idKey="RawMaterialID"
+        title="RawMaterial"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
         totalPages={maharajResponse?.data.totalPages || 1}
@@ -96,4 +90,4 @@ const AllMaharajWithSearch: React.FC = () => {
   );
 };
 
-export default AllMaharajWithSearch;
+export default AllRawMaterialWithSearch;

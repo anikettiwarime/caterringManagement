@@ -1,6 +1,6 @@
 import React from 'react';
 import {z} from 'zod';
-import {dishCategoryValidationSchema} from '@/lib/validation/dishSchema';
+import {dishCategoryValidationSchema} from '@/lib/validation/dishSchemas';
 import {Field} from '../common/forms/GenericForm';
 import {useCreateDishCategory} from '@/lib/react-query/queriesAndMutations/dishAndRawMaterials';
 import {useAuthContext} from '@/context/AuthContext';
