@@ -9,9 +9,14 @@ import { useSignOut } from '@/lib/react-query/queriesAndMutations/auth';
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
-  const {user} = useAuthContext();
+  const {user, token, setToken} = useAuthContext();
 
-  const { mutate: signOut} = useSignOut();
+  const { mutate: signOut } = useSignOut();
+  
+  const handleSignOut = () => {
+    signOut(token?.accessToken || '');
+    setToken(null);
+  };
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className='relative'>
@@ -71,7 +76,7 @@ const DropdownUser = () => {
             </li>
           </ul>
           <button
-          onClick={()=>signOut()}
+          onClick={handleSignOut}
            className='flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base'>
             <svg
               className='fill-current'

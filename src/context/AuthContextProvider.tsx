@@ -26,7 +26,7 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
         setIsAuthenticated(true);
       }
     }
-  }, []);
+  }, [token]);
 
   // Value of the context
   const contextValue = {
