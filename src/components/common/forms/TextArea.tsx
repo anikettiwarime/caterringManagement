@@ -9,7 +9,14 @@ interface TextAreaProps {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const TextArea: React.FC<TextAreaProps> = ({ id, name, placeholder, className, value, onChange }) => (
+const TextArea: React.FC<TextAreaProps> = ({
+  id,
+  name,
+  placeholder,
+  className,
+  value,
+  onChange,
+}) => (
   <textarea
     id={id}
     name={name}

@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
-import { DisplayTable } from '@/components/common/Tables';
-import { Column } from '@/types';
-import { useAuthContext } from '@/context/AuthContext';
-import { LoadingErrorNoData } from '@/components/Loader';
-import { useDebounceValue } from 'usehooks-ts';
-import { useSearchMaharaj } from '@/lib/react-query/queriesAndMutations/maharaj';
+import React, {useCallback, useState} from 'react';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column} from '@/types';
+import {useAuthContext} from '@/context/AuthContext';
+import {LoadingErrorNoData} from '@/components/Loader';
+import {useDebounceValue} from 'usehooks-ts';
+import {useSearchMaharaj} from '@/lib/react-query/queriesAndMutations/maharaj';
 
 // Define the Maharaj interface
 interface Maharaj {
@@ -17,15 +17,15 @@ interface Maharaj {
 
 // Define columns for the Maharaj table
 const columns: Column<Maharaj>[] = [
-  { header: 'Name', accessor: 'name' },
-  { header: 'Username', accessor: 'username' },
-  { header: 'Email', accessor: 'email' },
-  { header: 'Phone Number', accessor: 'PhoneNo' },
-  { header: 'Specialization', accessor: 'specialization' },
+  {header: 'Name', accessor: 'name'},
+  {header: 'Username', accessor: 'username'},
+  {header: 'Email', accessor: 'email'},
+  {header: 'Phone Number', accessor: 'PhoneNo'},
+  {header: 'Specialization', accessor: 'specialization'},
 ];
 
 const AllMaharajWithSearch: React.FC = () => {
-  const { token } = useAuthContext();
+  const {token} = useAuthContext();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -78,7 +78,7 @@ const AllMaharajWithSearch: React.FC = () => {
       <DisplayTable
         columns={columns}
         data={maharajResponse?.data.maharajs || []}
-        idKey="username"  // Use a unique key for the row
+        idKey="username" // Use a unique key for the row
         title="Maharajs"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}

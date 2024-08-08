@@ -171,12 +171,10 @@ export interface CreateRawMaterialCategory {
 }
 
 export interface RawMaterials {
-
-  RawMaterialID:string
-  RawMaterialName: string
-  RawMaterialCategoryID:string
-  RawMaterialUnit:string
-
+  RawMaterialID: string;
+  RawMaterialName: string;
+  RawMaterialCategoryID: string;
+  RawMaterialUnit: string;
 }
 
 export interface RawMaterialCategoryUpdateParams {
@@ -219,141 +217,106 @@ export interface CreateDishParams {
 }
 
 export interface Dishes {
-
   DishID: string;
   DishName: string;
   DishDescription: string;
   DishCategoryID: string;
-
 }
-
 
 // tab typ declaration
 
 type CategoryTypes = {
-  name: string,
-  accessor: string,
-  component:JSX.Element,
+  name: string;
+  accessor: string;
+  component: JSX.Element;
 };
 
 // tabtype declaration for first array
 
-
-
 export interface TabTypes {
-
-  name: string,
-  categories:CategoryTypes[]
-
+  name: string;
+  categories: CategoryTypes[];
 }
 
 export interface VerticalTabPropsTypes {
   // handleComponentConditionaly: (value: string) => void;
-  tabData: TabTypes[],
-  setJsxElement: (element:any) => void,
+  tabData: TabTypes[];
+  setJsxElement: (element: any) => void;
   // jsxElement:JSX.Element
 }
 
-
-
-
 // maharaj types declaration
 
-
 export interface CreateMaharaj {
-
-    username:string,
-    email:string,
-    phoneNo:string,
-    password:string,
-    name:string,
-    specialization:string,
-    experience:string,
-    caterorID:string,
-
-
+  username: string;
+  email: string;
+  phoneNo: string;
+  password: string;
+  name: string;
+  specialization: string;
+  experience: string;
+  caterorID: string;
 }
-
 
 export interface UpdateMaharaj {
-
-  id: string,
-  token:string,
-  Specialization: string,
-  Experience: string,
-  isAvailable:boolean
-
+  id: string;
+  token: string;
+  Specialization: string;
+  Experience: string;
+  isAvailable: boolean;
 }
-
 
 // client type declaration
 
-
 export interface CreateClient {
-
-  username: string,
-  email: string,
-  phoneNo: string,
-  password: string,
-  caterorID:string,
-  name: string,
-  isVeg: boolean,
-  isJain: boolean,
-  Address: string,
-  Caste: string
-
+  username: string;
+  email: string;
+  phoneNo: string;
+  password: string;
+  caterorID: string;
+  name: string;
+  isVeg: boolean;
+  isJain: boolean;
+  Address: string;
+  Caste: string;
 }
-
-
 
 export interface UpdateClient {
-
-  id: string,
-  token:string,
-  isVeg: boolean,
-  isJain: boolean,
-  Address: string,
-  Caste: string
-
+  id: string;
+  token: string;
+  isVeg: boolean;
+  isJain: boolean;
+  Address: string;
+  Caste: string;
 }
-
 
 // staff type declaration
 
 export interface Staff {
-
-  username: string,
-  email: string,
-  phoneNo: string,
-  password: string,
-  name: string,
-  jobType: string,
-  address: string,
-  caterorID: string,
-
+  username: string;
+  email: string;
+  phoneNo: string;
+  password: string;
+  name: string;
+  jobType: string;
+  address: string;
+  caterorID: string;
 }
-
 
 export interface CreateStaff {
-
-  username:string,
-    email:string,
-  phoneNo: string,
-  password: string,
-  name: string,
-  jobType: string,
-  address: string,
-  caterorID: string,
-
+  username: string;
+  email: string;
+  phoneNo: string;
+  password: string;
+  name: string;
+  jobType: string;
+  address: string;
+  caterorID: string;
 }
-
 
 export interface UpdateStaff {
-
-  id: string,
-  token:string,
-  jobType: string,
-  address: string,
-
+  id: string;
+  token: string;
+  jobType: string;
+  address: string;
 }
-

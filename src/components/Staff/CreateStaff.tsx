@@ -4,9 +4,8 @@ import {FiMail, FiPhone, FiUser} from 'react-icons/fi';
 import {Field} from '../common/forms/GenericForm';
 import {useAuthContext} from '@/context/AuthContext';
 import GenericForm from '../common/forms/GenericForm';
-import { staffValidationSchema } from '@/lib/validation/staffSchemas';
-import { useCreateStaff } from '@/lib/react-query/queriesAndMutations/staff';
-
+import {staffValidationSchema} from '@/lib/validation/staffSchemas';
+import {useCreateStaff} from '@/lib/react-query/queriesAndMutations/staff';
 
 type FormValues = z.infer<typeof staffValidationSchema>;
 
@@ -63,7 +62,6 @@ const fields: Field<FormValues>[] = [
     placeholder: 'Enter your Cateror Id',
   },
 ];
-
 
 const CreateStaff: React.FC = () => {
   const {

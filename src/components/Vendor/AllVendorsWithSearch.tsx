@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
-import { DisplayTable } from '@/components/common/Tables';
-import { Column } from '@/types';
-import { useAuthContext } from '@/context/AuthContext';
-import { useDebounceValue } from 'usehooks-ts';
+import {useCallback, useState} from 'react';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column} from '@/types';
+import {useAuthContext} from '@/context/AuthContext';
+import {useDebounceValue} from 'usehooks-ts';
 
 // Define the Maharaj interface
 interface Vendor {
@@ -15,15 +15,15 @@ interface Vendor {
 
 // Define columns for the Maharaj table
 const columns: Column<Vendor>[] = [
-  { header: 'Name', accessor: 'name' },
-  { header: 'Username', accessor: 'username' },
-  { header: 'Email', accessor: 'email' },
-  { header: 'Phone Number', accessor: 'PhoneNo' },
-  { header: 'Category', accessor: 'category' },
+  {header: 'Name', accessor: 'name'},
+  {header: 'Username', accessor: 'username'},
+  {header: 'Email', accessor: 'email'},
+  {header: 'Phone Number', accessor: 'PhoneNo'},
+  {header: 'Category', accessor: 'category'},
 ];
 
 const AllVendorsWithSearch = () => {
-  const { token } = useAuthContext();
+  const {token} = useAuthContext();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -60,7 +60,7 @@ const AllVendorsWithSearch = () => {
       <DisplayTable
         columns={columns}
         data={[]} // Empty data array
-        idKey="username"  // Use a unique key for the row
+        idKey="username" // Use a unique key for the row
         title="Vendors"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
@@ -79,7 +79,3 @@ const AllVendorsWithSearch = () => {
 };
 
 export default AllVendorsWithSearch;
-
-
-
-

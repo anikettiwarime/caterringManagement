@@ -35,7 +35,7 @@ const useSignUp = () => {
 
 const useSignOut = () => {
   return useMutation({
-    mutationFn: (token:string) => signOut(token),
+    mutationFn: (token: string) => signOut(token),
 
     onSuccess: () => {
       localStorage.removeItem(QUERY_KEYS.TOKEN);

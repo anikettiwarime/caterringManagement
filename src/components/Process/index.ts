@@ -1,2 +1,2 @@
-export {default as CreateProcess } from './CreateProcess'
-export {default as AllProcessessWithSearch } from './AllProcessessWithSearch'
+export {default as CreateProcess} from './CreateProcess';
+export {default as AllProcessessWithSearch} from './AllProcessessWithSearch';

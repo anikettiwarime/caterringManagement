@@ -18,7 +18,7 @@ export const staffConditonalRender: TabTypes[] = [
       {
         name: 'Delete Staff',
         accessor: 'DeleteStaff',
-        component: <CreateStaff/>,
+        component: <CreateStaff />,
       },
     ],
   },

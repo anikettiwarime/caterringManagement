@@ -1,9 +1,7 @@
 import {useAuthContext} from '@/context/AuthContext';
-import { Navigate } from '@tanstack/react-router';
+import {Navigate} from '@tanstack/react-router';
 
 const Home = () => {
-
-
   const {isAuthenticated} = useAuthContext();
 
   if (!isAuthenticated) {

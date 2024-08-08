@@ -1,21 +1,19 @@
-import { useCallback, useState } from 'react';
-import { DisplayTable } from '@/components/common/Tables';
-import { Column } from '@/types';
-import { useAuthContext } from '@/context/AuthContext';
-import { useDebounceValue } from 'usehooks-ts';
-
+import {useCallback, useState} from 'react';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column} from '@/types';
+import {useAuthContext} from '@/context/AuthContext';
+import {useDebounceValue} from 'usehooks-ts';
 
 interface UtensilsCategory {
-  utensilsCategory: string; 
+  utensilsCategory: string;
 }
 
 const columns: Column<UtensilsCategory>[] = [
-  { header: 'Category Name', accessor: 'utensilsCategory' },
+  {header: 'Category Name', accessor: 'utensilsCategory'},
 ];
 
-
 const AllUtensilsCategoryWithSearch = () => {
-  const { token } = useAuthContext();
+  const {token} = useAuthContext();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -52,7 +50,7 @@ const AllUtensilsCategoryWithSearch = () => {
       <DisplayTable
         columns={columns}
         data={[]} // Empty data array
-        idKey="username"  // Use a unique key for the row
+        idKey="username" // Use a unique key for the row
         title="Utensils Category"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}

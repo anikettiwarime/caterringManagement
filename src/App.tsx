@@ -7,7 +7,7 @@ import AuthContextProvider from './context/AuthContextProvider';
 
 // Create a new router instance
 const router = createRouter({
-  routeTree
+  routeTree,
 });
 
 // Register the router instance for type safety

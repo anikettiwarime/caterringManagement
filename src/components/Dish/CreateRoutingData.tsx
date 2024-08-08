@@ -51,6 +51,5 @@ export const DishRouting: TabTypes[] = [
         component: <CreateDish />,
       },
     ],
-    },
-  
+  },
 ];

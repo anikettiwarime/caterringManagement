@@ -1,11 +1,10 @@
 import React from 'react';
-import { GenericForm } from '../common/forms';
-import {z} from "zod"
-import { clientValidationSchema } from '@/lib/validation/clientSchemas';
-import { Field } from '../common/forms/GenericForm';
-import { FiMail, FiPhone, FiUser } from 'react-icons/fi';
-import { useCreateClient } from '@/lib/react-query/queriesAndMutations/client';
-
+import {GenericForm} from '../common/forms';
+import {z} from 'zod';
+import {clientValidationSchema} from '@/lib/validation/clientSchemas';
+import {Field} from '../common/forms/GenericForm';
+import {FiMail, FiPhone, FiUser} from 'react-icons/fi';
+import {useCreateClient} from '@/lib/react-query/queriesAndMutations/client';
 
 type FormValues = z.infer<typeof clientValidationSchema>;
 
@@ -75,46 +74,38 @@ const fields: Field<FormValues>[] = [
   },
 ];
 
-
-
 const CreateClient: React.FC = () => {
+  const {
+    isError,
+    isPending,
+    error,
+    mutateAsync: createClient,
+  } = useCreateClient();
 
+  const handleFormSubmit = async (data: FormValues) => {
+    console.log('Form submitted', data);
 
-    
-    const {
-      isError,
-      isPending,
-      error,
-      mutateAsync: createClient,
-    } = useCreateClient();
+    try {
+      const res = await createClient(data);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const handleFormSubmit = async (data: FormValues) => {
-      console.log('Form submitted', data);
-
-      try {
-        const res = await createClient(data);
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-
-
-    return (
-      <GenericForm<FormValues>
-        schema={clientValidationSchema}
-        onSubmit={handleFormSubmit}
-        isPending={isPending}
-        isError={isError}
-        error={error}
-        fields={fields}
-        formType="create"
-        buttonText={{submit: 'Create', cancel: 'Cancel'}}
-        formTitle="Create Client"
-      />
-    );
-    
+  return (
+    <GenericForm<FormValues>
+      schema={clientValidationSchema}
+      onSubmit={handleFormSubmit}
+      isPending={isPending}
+      isError={isError}
+      error={error}
+      fields={fields}
+      formType="create"
+      buttonText={{submit: 'Create', cancel: 'Cancel'}}
+      formTitle="Create Client"
+    />
+  );
 };
 
 export default CreateClient;

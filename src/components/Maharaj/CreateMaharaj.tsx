@@ -1,10 +1,10 @@
 import React from 'react';
-import { Field } from '@/components/common/forms/GenericForm';
-import { GenericForm } from '@/components/common/forms';
-import { z } from 'zod';
-import { FiMail, FiPhone, FiUser } from 'react-icons/fi';
-import { maharajValidationSchema } from '@/lib/validation/maharajSchemas';
-import { useCreateMaharaj } from '@/lib/react-query/queriesAndMutations/maharaj';
+import {Field} from '@/components/common/forms/GenericForm';
+import {GenericForm} from '@/components/common/forms';
+import {z} from 'zod';
+import {FiMail, FiPhone, FiUser} from 'react-icons/fi';
+import {maharajValidationSchema} from '@/lib/validation/maharajSchemas';
+import {useCreateMaharaj} from '@/lib/react-query/queriesAndMutations/maharaj';
 
 type FormValues = z.infer<typeof maharajValidationSchema>;
 
@@ -63,7 +63,12 @@ const fields: Field<FormValues>[] = [
 ];
 
 const CreateMaharaj: React.FC = () => {
-  const { isError, isPending, error, mutateAsync: createMaharaj } = useCreateMaharaj();
+  const {
+    isError,
+    isPending,
+    error,
+    mutateAsync: createMaharaj,
+  } = useCreateMaharaj();
 
   const handleFormSubmit = async (data: FormValues) => {
     console.log('Form submitted', data);
@@ -85,7 +90,7 @@ const CreateMaharaj: React.FC = () => {
       error={error}
       fields={fields}
       formType="create"
-      buttonText={{ submit: 'Create', cancel: 'Cancel' }}
+      buttonText={{submit: 'Create', cancel: 'Cancel'}}
       formTitle="Create Maharaj"
     />
   );

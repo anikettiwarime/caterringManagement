@@ -13,7 +13,6 @@ const columns: Column<Cateror>[] = [
   {header: 'Phone Number', accessor: 'PhoneNo'},
 ];
 
-
 const AllCaterorsWithSearch = () => {
   const {token} = useAuthContext();
   const [currentPage, setCurrentPage] = useState<number>(1);

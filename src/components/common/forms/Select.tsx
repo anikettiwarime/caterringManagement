@@ -17,7 +17,14 @@ interface SelectProps {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const Select: React.FC<SelectProps> = ({ id, name, options, className, value, onChange }) => (
+const Select: React.FC<SelectProps> = ({
+  id,
+  name,
+  options,
+  className,
+  value,
+  onChange,
+}) => (
   <select
     id={id}
     name={name}

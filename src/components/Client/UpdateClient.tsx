@@ -1,18 +1,18 @@
-import React from 'react'
-import { z } from "zod"
-import { useUpdateClient } from '@/lib/react-query/queriesAndMutations/client'
-import GenericForm, { Field } from '../common/forms/GenericForm'
-import { clientValidationSchema } from '@/lib/validation/clientSchemas';
-import {useAuthContext } from '@/context/AuthContext';
-import { IdAndToken, UpdateClient } from '@/types';
-import { updateClient } from '@/lib/api/client';
+import React from 'react';
+import {z} from 'zod';
+import {useUpdateClient} from '@/lib/react-query/queriesAndMutations/client';
+import GenericForm, {Field} from '../common/forms/GenericForm';
+import {clientValidationSchema} from '@/lib/validation/clientSchemas';
+import {useAuthContext} from '@/context/AuthContext';
+import {IdAndToken, UpdateClient} from '@/types';
+import {updateClient} from '@/lib/api/client';
 
 type FormValues = z.infer<typeof clientValidationSchema>;
 
 const fields: Field<FormValues>[] = [
   {
     label: 'Client Id',
-    name: '',
+    name: 'caterorID',
     type: 'text',
     placeholder: 'Aenter client id',
   },
@@ -48,42 +48,29 @@ const fields: Field<FormValues>[] = [
   },
 ];
 
-
-
 const UpdateClient: React.FC = () => {
+  const {token} = useAuthContext();
 
+  const {
+    isError,
+    error,
+    isPending,
+    mutateAsync: updateClient,
+  } = useUpdateClient();
 
-  const { token } = useAuthContext()
-
-  const { isError, error ,isPending ,mutateAsync:updateClient} = useUpdateClient()
-  
   const handleFormSubmit = async (data: UpdateClient) => {
-    
-
     try {
-
       const res = await updateClient({
         ...data,
-        id:
-        token:token?.accessToken as string
+        id: data.id,
+        token: token?.accessToken as string,
       });
 
-      console.log(res)
-      
+      console.log(res);
     } catch (error) {
-      
-      console.log(error)
-
+      console.log(error);
     }
-
-    
-
-  }
-
-
-
-
-    
+  };
 
   return (
     <GenericForm<FormValues>
@@ -98,5 +85,4 @@ const UpdateClient: React.FC = () => {
       formTitle="Create Client"
     />
   );
-
-}
+};

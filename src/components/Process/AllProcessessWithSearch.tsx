@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
-import { DisplayTable } from '@/components/common/Tables';
-import { Column } from '@/types';
-import { useAuthContext } from '@/context/AuthContext';
-import { useDebounceValue } from 'usehooks-ts';
+import {useCallback, useState} from 'react';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column} from '@/types';
+import {useAuthContext} from '@/context/AuthContext';
+import {useDebounceValue} from 'usehooks-ts';
 
 // Define the Maharaj interface
 interface Process {
@@ -12,12 +12,12 @@ interface Process {
 
 // Define columns for the Maharaj table
 const columns: Column<Process>[] = [
-  { header: 'Process Name', accessor: 'processname' },
-  { header: 'Description', accessor: 'description' },
+  {header: 'Process Name', accessor: 'processname'},
+  {header: 'Description', accessor: 'description'},
 ];
 
 const AllMaharajsWithSearch = () => {
-  const { token } = useAuthContext();
+  const {token} = useAuthContext();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -54,7 +54,7 @@ const AllMaharajsWithSearch = () => {
       <DisplayTable
         columns={columns}
         data={[]} // Empty data array
-        idKey="username"  // Use a unique key for the row
+        idKey="username" // Use a unique key for the row
         title="Process"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}

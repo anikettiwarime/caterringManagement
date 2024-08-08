@@ -1,21 +1,19 @@
-import { useCallback, useState } from 'react';
-import { DisplayTable } from '@/components/common/Tables';
-import { Column } from '@/types';
-import { useAuthContext } from '@/context/AuthContext';
-import { useDebounceValue } from 'usehooks-ts';
-
+import {useCallback, useState} from 'react';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column} from '@/types';
+import {useAuthContext} from '@/context/AuthContext';
+import {useDebounceValue} from 'usehooks-ts';
 
 interface DisposalCategory {
   categoryName: string;
 }
 
 const columns: Column<DisposalCategory>[] = [
-  { header: 'Category Name', accessor: 'categoryName' },
+  {header: 'Category Name', accessor: 'categoryName'},
 ];
 
-
 const AllDisposalCategoryWithSearch = () => {
-  const { token } = useAuthContext();
+  const {token} = useAuthContext();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -52,7 +50,7 @@ const AllDisposalCategoryWithSearch = () => {
       <DisplayTable
         columns={columns}
         data={[]} // Empty data array
-        idKey="username"  // Use a unique key for the row
+        idKey="username" // Use a unique key for the row
         title="Disposal Category"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}

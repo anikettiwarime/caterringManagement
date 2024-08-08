@@ -1,9 +1,8 @@
-  import { useCallback, useState } from 'react';
-import { DisplayTable } from '@/components/common/Tables';
-import { Column } from '@/types';
-import { useAuthContext } from '@/context/AuthContext';
-import { useDebounceValue } from 'usehooks-ts';
-
+import {useCallback, useState} from 'react';
+import {DisplayTable} from '@/components/common/Tables';
+import {Column} from '@/types';
+import {useAuthContext} from '@/context/AuthContext';
+import {useDebounceValue} from 'usehooks-ts';
 
 interface Disposal {
   disposalName: string;
@@ -11,14 +10,12 @@ interface Disposal {
 }
 
 const columns: Column<Disposal>[] = [
-  { header: 'Disposal Name', accessor: 'disposalName' },
-  { header: 'Category Name', accessor: 'categoryName' },
+  {header: 'Disposal Name', accessor: 'disposalName'},
+  {header: 'Category Name', accessor: 'categoryName'},
 ];
 
-
-
 const AllDisposalWithSearch = () => {
-  const { token } = useAuthContext();
+  const {token} = useAuthContext();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -55,7 +52,7 @@ const AllDisposalWithSearch = () => {
       <DisplayTable
         columns={columns}
         data={[]} // Empty data array
-        idKey="username"  // Use a unique key for the row
+        idKey="username" // Use a unique key for the row
         title="Disposal"
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}

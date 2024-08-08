@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
 import Breadcrumb from '@/components/Breadcrumbs';
 import {VerticalTab} from '@/components/VerticalTab';
-import { clientConditonalRender } from '@/components/Client/CreateClientRouting';
-
+import {clientConditonalRender} from '@/components/Client/CreateClientRouting';
 
 const Client: React.FC = () => {
-
-
   const [jsxElement, setJsxElement] = useState<JSX.Element>();
 
   return (
@@ -14,7 +11,10 @@ const Client: React.FC = () => {
       <Breadcrumb />
       <div className="grid grid-cols-8">
         <div className="col-span-2">
-          <VerticalTab tabData={clientConditonalRender} setJsxElement={setJsxElement} />
+          <VerticalTab
+            tabData={clientConditonalRender}
+            setJsxElement={setJsxElement}
+          />
         </div>
         <div className="col-span-6">{jsxElement}</div>
       </div>

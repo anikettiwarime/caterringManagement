@@ -3,21 +3,18 @@ import {FaAngleDown} from 'react-icons/fa6';
 import {TabTypes} from '@/types';
 import {VerticalTabPropsTypes} from '@/types';
 
-
 const VerticalTab: React.FC<VerticalTabPropsTypes> = (props) => {
-
-  const { tabData , setJsxElement}: VerticalTabPropsTypes = props;
+  const {tabData, setJsxElement}: VerticalTabPropsTypes = props;
 
   const [dropDownKey, setDropDownKey] = useState<number>();
 
-  const [component, setComponent] = useState<string>(tabData[0].categories[0].accessor);
-
+  const [component, setComponent] = useState<string>(
+    tabData[0].categories[0].accessor,
+  );
 
   const handleComponentConditionaly = (value: string) => {
-    
-      setComponent(value);
-
-  }
+    setComponent(value);
+  };
 
   const componentToRender = tabData.map((renderComponent) => {
     return renderComponent.categories.map((renderComponent2) => {
@@ -28,9 +25,8 @@ const VerticalTab: React.FC<VerticalTabPropsTypes> = (props) => {
   });
 
   useEffect(() => {
-    setJsxElement(componentToRender)
-  },[component])
-  
+    setJsxElement(componentToRender);
+  }, [component]);
 
   return (
     <div className="w-50 rounded-sm border border-stroke bg-white p-2 shadow-default dark:border-strokedark dark:bg-boxdark">

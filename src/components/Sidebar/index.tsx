@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Link, useLocation} from '@tanstack/react-router';
 import SidebarLinkGroup from './SidebarLinkGroup';
 // import Logo from '../../assets/images/logo/logo.svg';
-import Logo from '../../assets/images/logo/sidebar-logo.png'
+import Logo from '../../assets/images/logo/sidebar-logo.png';
 import {SidebarProps} from '@/types';
 import {PiSquaresFourLight} from 'react-icons/pi';
 import {IoIosArrowUp} from 'react-icons/io';
@@ -68,7 +68,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <Link to="/">
-          <img src={Logo} alt="Logo"/>
+          <img src={Logo} alt="Logo" />
         </Link>
 
         <button
@@ -229,7 +229,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                           </li>
                           <li>
                             <Link
-                              to='/users/client'
+                              to="/users/client"
                               className={
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white'
                               }
@@ -240,7 +240,7 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
                           </li>
                           <li>
                             <Link
-                              to='/users/staff'
+                              to="/users/staff"
                               className={
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white'
                               }
