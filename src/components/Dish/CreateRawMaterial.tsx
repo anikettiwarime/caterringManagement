@@ -40,7 +40,7 @@ const CreateRawMaterial: React.FC = () => {
     }
   }, [categoryName, refetch]);
 
-  const loadOptions = async (inputValue: string) => {
+  const loadCategoryOptions = async (inputValue: string) => {
     setCategoryName(inputValue); // Update categoryName to trigger refetch
 
     if (isLoading || isError) {
@@ -64,6 +64,16 @@ const CreateRawMaterial: React.FC = () => {
     );
   };
 
+  const loadUnitOptions = async () => {
+    return [
+      {value: 'kg', label: 'kg'},
+      {value: 'g', label: 'g'},
+      {value: 'l', label: 'l'},
+      {value: 'ml', label: 'ml'},
+      {value: 'pcs', label: 'pcs'},
+    ];
+  };
+
   const fields: Field<FormValues>[] = [
     {
       label: 'Raw Material Name',
@@ -77,19 +87,14 @@ const CreateRawMaterial: React.FC = () => {
       placeholder: 'Category Name',
       type: 'select',
       isSearchable: true,
-      loadOptions,
+      loadOptions: loadCategoryOptions,
     },
     {
       label: 'Unit',
       name: 'Unit',
       placeholder: 'Unit',
       type: 'select',
-      options: [
-        {value: 'kg', label: 'kg'},
-        {value: 'g', label: 'g'},
-        {value: 'l', label: 'l'},
-        {value: 'ml', label: 'ml'},
-      ],
+      loadOptions: loadUnitOptions,
       isSearchable: false,
     },
   ];
