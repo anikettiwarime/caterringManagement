@@ -23,12 +23,12 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
         setUser(null);
         setIsAuthenticated(false);
       } else {
-        setToken(token);
+        setToken(localToken);
         setUser(decodedToken);
         setIsAuthenticated(true);
       }
     }
-  }, [token]);
+  }, []);
 
   // Value of the context
   const contextValue = {

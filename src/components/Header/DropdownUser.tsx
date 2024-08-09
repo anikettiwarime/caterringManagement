@@ -11,11 +11,15 @@ const DropdownUser = () => {
 
   const {user, token, setToken} = useAuthContext();
 
-  const {mutate: signOut} = useSignOut();
+  const {mutate: signOut, isError} = useSignOut();
 
-  const handleSignOut = () => {
-    signOut(token?.accessToken || '');
+  const handleSignOut = async () => {
+    await signOut(token?.accessToken || '');
     setToken(null);
+
+    if (isError) {
+      console.error('Sign out error:', isError);
+    }
   };
 
   return (
